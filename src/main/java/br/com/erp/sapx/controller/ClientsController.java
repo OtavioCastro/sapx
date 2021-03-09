@@ -2,8 +2,8 @@ package br.com.erp.sapx.controller;
 
 import br.com.erp.sapx.controller.converter.ClienteToClienteResourceConverter;
 import br.com.erp.sapx.controller.converter.ProjetoToProjetoResourceConverter;
-import br.com.erp.sapx.controller.resource.ProjetoResource;
-import br.com.erp.sapx.usecase.projects.FindAllProjectsUseCase;
+import br.com.erp.sapx.controller.resource.ClienteResource;
+import br.com.erp.sapx.usecase.clients.FindAllClientsUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +15,18 @@ import static java.util.stream.Collectors.toList;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/projetos")
-public class ProjetosController {
+@RequestMapping("/clients")
+public class ClientsController {
 
-    private final FindAllProjectsUseCase findAllProjectsUseCase;
+    private final FindAllClientsUseCase findAllClientsUseCase;
     private final ClienteToClienteResourceConverter toClienteResourceConverter;
     private final ProjetoToProjetoResourceConverter toProjetoResourceConverter;
 
     @GetMapping
-    public List<ProjetoResource> findAllProjects(){
-        return findAllProjectsUseCase.execute()
+    public List<ClienteResource> findAllProjects(){
+        return findAllClientsUseCase.execute()
                 .stream()
-                .map(toProjetoResourceConverter::convert)
+                .map(toClienteResourceConverter::convert)
                 .collect(toList());
     }
 
