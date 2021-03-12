@@ -1,4 +1,4 @@
-package br.com.erp.sapx.domain;
+package br.com.erp.sapx.controller.resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder(toBuilder = true)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
-    private String id;
-    private Integer numCliente;
+public class UpdateClientRequestResource {
     private String nome;
     private String cnpj;
 }

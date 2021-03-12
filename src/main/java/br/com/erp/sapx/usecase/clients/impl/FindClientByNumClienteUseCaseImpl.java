@@ -19,7 +19,7 @@ public class FindClientByNumClienteUseCaseImpl implements FindClientByNumCliente
     @Override
     public Client execute(Integer numCliente) {
         return ofNullable(clientGateway.findClientByNum(numCliente))
-                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Cliente número " + numCliente +" não encontrado."));
     }
 
 }

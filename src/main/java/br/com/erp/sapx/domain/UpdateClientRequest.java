@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder(toBuilder = true)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
-    private String id;
-    private Integer numCliente;
+public class UpdateClientRequest {
     private String nome;
     private String cnpj;
 }

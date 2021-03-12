@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ProjetoToProjetoResourceConverter {
+public class ProjectToProjectResourceConverter {
 
     private final ModelMapper modelMapper;
 

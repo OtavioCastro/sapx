@@ -17,8 +17,8 @@ public class FindProjectByNumProjetoUseCaseImpl implements FindProjectByNumProje
     private final ProjectGateway gateway;
 
     @Override
-    public Project execute(Integer numProj) {
-        return ofNullable(gateway.findProjectByNumProjeto(numProj))
-                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto não encontrado."));
+    public Project execute(Integer numProjeto) {
+        return ofNullable(gateway.findProjectByNumProjeto(numProjeto))
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto n°" + numProjeto + " não encontrado."));
     }
 }

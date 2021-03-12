@@ -16,10 +16,10 @@ public class DeleteProjectUseCaseImpl implements DeleteProjectUseCase {
     private final ProjectGateway gateway;
 
     @Override
-    public void execute(Integer numProj) {
-        final var project = of(gateway.findProjectByNumProjeto(numProj))
+    public void execute(Integer numProjeto) {
+        final var project = of(gateway.findProjectByNumProjeto(numProjeto))
                 .filter(projectResponse -> !projectResponse.getId().isBlank())
-                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto não encontrado."));
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto n°" + numProjeto + " não encontrado."));
 
         gateway.deleteProject(project.getId());
     }

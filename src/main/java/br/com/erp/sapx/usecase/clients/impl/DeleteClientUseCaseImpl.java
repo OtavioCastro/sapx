@@ -23,7 +23,7 @@ public class DeleteClientUseCaseImpl implements DeleteClientUseCase {
     @Override
     public void execute(Integer numCliente) {
         final var client = ofNullable(clientGateway.findClientByNum(numCliente))
-                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Cliente número " + numCliente +" não encontrado."));
 
         of(projectGateway.findAllProjectsByIdCliente(client.getId()))
                 .filter(List::isEmpty)

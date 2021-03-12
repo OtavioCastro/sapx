@@ -9,7 +9,6 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper mapper(){
-        System.out.println("INICIANDO O MODELMAPPER");
         return new ModelMapper();
     }
 
