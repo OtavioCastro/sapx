@@ -1,43 +1,57 @@
 package br.com.erp.sapx.repository.impl;
 
-import br.com.erp.sapx.domain.Cliente;
-import br.com.erp.sapx.gateway.ClienteGateway;
+import br.com.erp.sapx.domain.Client;
+import br.com.erp.sapx.gateway.ClientGateway;
 import br.com.erp.sapx.repository.ClienteRepository;
-import br.com.erp.sapx.repository.converter.ClienteModelToClienteConverter;
+import br.com.erp.sapx.repository.converter.ClientModelToClientConverter;
+import br.com.erp.sapx.repository.converter.ClientToClientModelConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static java.util.Optional.of;
 import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor
-public class ClientGatewayImpl implements ClienteGateway {
+public class ClientGatewayImpl implements ClientGateway {
 
     private final ClienteRepository clienteRepository;
-    private final ClienteModelToClienteConverter toClienteConverter;
+    private final ClientModelToClientConverter toClientConverter;
+    private final ClientToClientModelConverter toClientModelConverter;
 
     @Override
-    public List<Cliente> findAllClientes() {
+    public List<Client> findAllClientes() {
         return clienteRepository.findAll()
                 .stream()
-                .map(toClienteConverter::convert)
+                .map(toClientConverter::convert)
                 .collect(toList());
     }
 
     @Override
-    public Cliente findClienteById(Integer id) {
-        return null;
+    public Client findClienteById(String id) {
+        return clienteRepository.findById(id)
+                .map(toClientConverter::convert)
+                .orElseGet(Client::new);
     }
 
     @Override
-    public void addOrUpdateCliente(Cliente cliente) {
-
+    public Client addOrUpdateCliente(Client client) {
+        return of(client)
+                .map(toClientModelConverter::convert)
+                .map(clienteRepository::save)
+                .map(toClientConverter::convert)
+                .orElseGet(Client::new);
     }
 
     @Override
     public void removeCliente(Integer id) {
 
+    }
+
+    @Override
+    public Client findClientByNum(Integer numCliente) {
+        return clienteRepository.findByNumCliente(numCliente);
     }
 }

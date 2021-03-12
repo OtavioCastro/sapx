@@ -1,6 +1,5 @@
 package br.com.erp.sapx.domain;
 
-import br.com.erp.sapx.controller.resource.ProjectHoursResource;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +11,9 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Project {
-    private String id;
+public class InsertProjectRequest {
+    private Integer numCliente;
     private Integer numProjeto;
-    private Client cliente;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private Double valor;

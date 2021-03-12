@@ -12,10 +12,9 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjetoResource {
-    private String id;
+public class InsertProjectRequestResource {
+    private Integer numCliente;
     private Integer numProjeto;
-    private ClienteResource cliente;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataInicio;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")

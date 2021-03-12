@@ -1,7 +1,7 @@
 package br.com.erp.sapx.usecase.clients.impl;
 
-import br.com.erp.sapx.domain.Cliente;
-import br.com.erp.sapx.gateway.ClienteGateway;
+import br.com.erp.sapx.domain.Client;
+import br.com.erp.sapx.gateway.ClientGateway;
 import br.com.erp.sapx.usecase.clients.FindAllClientsUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,10 @@ import static java.util.Optional.of;
 @AllArgsConstructor
 public class FindAllClientsUseCaseImpl implements FindAllClientsUseCase {
 
-    private final ClienteGateway gateway;
+    private final ClientGateway gateway;
 
     @Override
-    public List<Cliente> execute() {
+    public List<Client> execute() {
         return of(gateway.findAllClientes())
                 .filter(clients -> !clients.isEmpty())
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Não há clientes cadastrados"));

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
-    private String id;
+public class InsertClientRequest {
+    private Integer numCliente;
     private String nome;
     private String cnpj;
 }

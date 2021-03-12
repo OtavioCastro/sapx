@@ -1,21 +1,15 @@
-package br.com.erp.sapx.repository.model;
+package br.com.erp.sapx.controller.resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
-public class ClientModel {
-
-    @Id
-    private String id;
+public class InsertClientRequestResource {
     private Integer numCliente;
     private String nome;
     private String cnpj;

@@ -8,5 +8,9 @@ import org.springframework.context.annotation.Configuration;
 public class ModelMapperConfig {
 
     @Bean
-    public ModelMapper mapper(){ return new ModelMapper();}
+    public ModelMapper mapper(){
+        System.out.println("INICIANDO O MODELMAPPER");
+        return new ModelMapper();
+    }
+
 }

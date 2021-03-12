@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ProjectModelToProjectConverter {
+public class ProjectToProjectModelConverter {
 
     private final ModelMapper modelMapper;
 
-    public Project convert(ProjectModel projectModel){
-        return modelMapper.map(projectModel, Project.class);
+    public ProjectModel convert(Project project){
+        return modelMapper.map(project, ProjectModel.class);
     }
 }
