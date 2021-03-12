@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
-import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
 @Service
@@ -36,7 +35,7 @@ public class InsertProjectUseCaseImpl implements InsertProjectUseCase {
                 .horasProjeto(request.getHorasProjeto())
                 .build();
 
-        return of(projectGateway.insertOrUpdateProject(project))
+        return ofNullable(projectGateway.insertOrUpdateProject(project))
                 .orElseThrow(() ->  new HttpClientErrorException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível cadastrar o projeto."));
     }
 }

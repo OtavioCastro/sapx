@@ -17,41 +17,43 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 public class ClientGatewayImpl implements ClientGateway {
 
-    private final ClienteRepository clienteRepository;
+    private final ClienteRepository repository;
     private final ClientModelToClientConverter toClientConverter;
     private final ClientToClientModelConverter toClientModelConverter;
 
     @Override
     public List<Client> findAllClientes() {
-        return clienteRepository.findAll()
+        return repository.findAll()
                 .stream()
                 .map(toClientConverter::convert)
                 .collect(toList());
     }
 
     @Override
-    public Client findClienteById(String id) {
-        return clienteRepository.findById(id)
+    public Client findClientByNum(Integer numCliente) {
+        return repository.findByNumCliente(numCliente)
                 .map(toClientConverter::convert)
-                .orElseGet(Client::new);
+                .orElse(null);
+    }
+
+    @Override
+    public Client findClienteById(String id) {
+        return repository.findById(id)
+                .map(toClientConverter::convert)
+                .orElse(null);
     }
 
     @Override
     public Client addOrUpdateCliente(Client client) {
         return of(client)
                 .map(toClientModelConverter::convert)
-                .map(clienteRepository::save)
+                .map(repository::save)
                 .map(toClientConverter::convert)
-                .orElseGet(Client::new);
+                .orElse(null);
     }
 
     @Override
-    public void removeCliente(Integer id) {
-
-    }
-
-    @Override
-    public Client findClientByNum(Integer numCliente) {
-        return clienteRepository.findByNumCliente(numCliente);
+    public void deleteClient(String id) {
+        repository.deleteById(id);
     }
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteResource {
+public class ClientResource {
     private String id;
     private Integer numCliente;
     private String nome;

@@ -9,5 +9,5 @@ public interface ClientGateway {
     Client findClienteById(String id);
     Client findClientByNum(Integer numCliente);
     Client addOrUpdateCliente(Client client);
-    void removeCliente(Integer id);
+    void deleteClient(String id);
 }

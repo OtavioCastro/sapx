@@ -30,9 +30,17 @@ public class ProjectGatewayImpl implements ProjectGateway {
     }
 
     @Override
-    public Project findProject(String id) {
-        // TODO: 09/03/2021
-        return null;
+    public Project findProjectById(String id) {
+        return repository.findById(id)
+                .map(toProjectConverter::convert)
+                .orElse(null);
+    }
+
+    @Override
+    public Project findProjectByNumProjeto(Integer numProjeto) {
+        return repository.findByNumProjeto(numProjeto)
+                .map(toProjectConverter::convert)
+                .orElse(null);
     }
 
     @Override
@@ -41,6 +49,19 @@ public class ProjectGatewayImpl implements ProjectGateway {
                 .map(toProjectModelConverter::convert)
                 .map(repository::save)
                 .map(toProjectConverter::convert)
-                .orElseGet(Project::new);
+                .orElse(null);
+    }
+
+    @Override
+    public void deleteProject(String id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public List<Project> findAllProjectsByIdCliente(String id) {
+        return repository.findAllByClienteId(id)
+                .stream()
+                .map(toProjectConverter::convert)
+                .collect(toList());
     }
 }
