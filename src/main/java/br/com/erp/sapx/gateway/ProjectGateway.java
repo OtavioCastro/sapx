@@ -7,8 +7,9 @@ import java.util.List;
 public interface ProjectGateway {
     List<Project> findAllProjects();
     List<Project> findAllProjectsByIdCliente(String id);
+    List<Project> findAllProjectsWithParams(Long numProjeto, String nomeCliente, String status);
     Project findProjectById(String id);
-    Project findProjectByNumProjeto(Integer numProjeto);
+    Project findProjectByNumProjeto(Long numProjeto);
     Project insertOrUpdateProject(Project request);
     void deleteProject(String id);
 }

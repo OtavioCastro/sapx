@@ -37,7 +37,15 @@ public class ProjectGatewayImpl implements ProjectGateway {
     }
 
     @Override
-    public Project findProjectByNumProjeto(Integer numProjeto) {
+    public List<Project> findAllProjectsWithParams(Long numProjeto, String nomeCliente, String status) {
+        return repository.findProjectsWithParams(numProjeto, nomeCliente, status)
+                .stream()
+                .map(toProjectConverter::convert)
+                .collect(toList());
+    }
+
+    @Override
+    public Project findProjectByNumProjeto(Long numProjeto) {
         return repository.findByNumProjeto(numProjeto)
                 .map(toProjectConverter::convert)
                 .orElse(null);

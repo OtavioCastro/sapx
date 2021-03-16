@@ -24,23 +24,27 @@ public class ProjetosController {
     private final FindAllProjectsUseCase findAllProjectsUseCase;
     private final InsertProjectUseCase insertProjectUseCase;
     private final FindProjectByNumProjetoUseCase findProjectByNumProjetoUseCase;
+    private final FindAllProjectsWithParamsUseCase findAllProjectsWithParamsUseCase;
     private final DeleteProjectUseCase deleteProjectUseCase;
     private final UpdateProjectUseCase updateProjectUseCase;
-    private final ProjectToProjectResourceConverter toProjectResourceConverter
-            ;
+    private final ProjectToProjectResourceConverter toProjectResourceConverter;
     private final InsertProjectRequestResourceToInsertProjectRequestConverter toInsertProjectRequestConverter;
     private final UpdateProjectRequestResourceToUpdateProjectRequestConverter toUpdateProjectRequestConverter;
 
     @GetMapping
-    public List<ProjectResource> findAllProjects(){
-        return findAllProjectsUseCase.execute()
+    public List<ProjectResource> findAllProjects(
+            @RequestParam(value = "numProjeto", defaultValue = "0") Long numProjeto,
+            @RequestParam(value = "nomeCliente", defaultValue = "") String nomeCliente,
+            @RequestParam(value = "status", defaultValue = "") String status
+    ){
+        return findAllProjectsWithParamsUseCase.execute(numProjeto, nomeCliente, status)
                 .stream()
                 .map(toProjectResourceConverter::convert)
                 .collect(toList());
     }
 
     @GetMapping("/{numProj}")
-    public ProjectResource findByNum(@PathVariable Integer numProj){
+    public ProjectResource findByNum(@PathVariable Long numProj){
         return of(findProjectByNumProjetoUseCase.execute(numProj))
                 .map(toProjectResourceConverter::convert)
                 .orElseGet(ProjectResource::new);
@@ -57,17 +61,16 @@ public class ProjetosController {
 
     @DeleteMapping("/{numProjeto}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProject(@PathVariable Integer numProjeto){
+    public void deleteProject(@PathVariable Long numProjeto){
         deleteProjectUseCase.execute(numProjeto);
     }
 
     @PutMapping("/{numProjeto}")
-    public ProjectResource updateProject(@PathVariable Integer numProjeto, @RequestBody UpdateProjectRequestResource requestBody){
+    public ProjectResource updateProject(@PathVariable Long numProjeto, @RequestBody UpdateProjectRequestResource requestBody){
         return of(requestBody)
                 .map(toUpdateProjectRequestConverter::convert)
                 .map(request -> updateProjectUseCase.execute(numProjeto, request))
                 .map(toProjectResourceConverter::convert)
                 .orElseGet(ProjectResource::new);
     }
-
 }

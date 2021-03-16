@@ -16,7 +16,7 @@ public class DeleteProjectUseCaseImpl implements DeleteProjectUseCase {
     private final ProjectGateway gateway;
 
     @Override
-    public void execute(Integer numProjeto) {
+    public void execute(Long numProjeto) {
         final var project = of(gateway.findProjectByNumProjeto(numProjeto))
                 .filter(projectResponse -> !projectResponse.getId().isBlank())
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto n°" + numProjeto + " não encontrado."));

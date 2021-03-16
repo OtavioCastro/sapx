@@ -1,5 +1,5 @@
 package br.com.erp.sapx.usecase.projects;
 
 public interface DeleteProjectUseCase {
-    void execute(Integer numProjeto);
+    void execute(Long numProjeto);
 }

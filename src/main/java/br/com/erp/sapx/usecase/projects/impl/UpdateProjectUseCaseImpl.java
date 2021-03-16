@@ -21,7 +21,7 @@ public class UpdateProjectUseCaseImpl implements UpdateProjectUseCase {
     private final ProjectGateway gateway;
 
     @Override
-    public Project execute(Integer numProjeto, UpdateProjectRequest request) {
+    public Project execute(Long numProjeto, UpdateProjectRequest request) {
         final var project = ofNullable(gateway.findProjectByNumProjeto(numProjeto))
                 .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Projeto n°" + numProjeto + " não encontrado."));
 
